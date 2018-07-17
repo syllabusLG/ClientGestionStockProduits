@@ -61,7 +61,7 @@ export class ProduitComponent implements OnInit {
     this.createFrom();
   }
   deleteProduit(){
-    this.produitServie.deleteProduit(this.selectedProduit.ref).subscribe(
+    this.produitServie.deleteProduit(this.selectedProduit.id).subscribe(
       res=>{
         this.selectedProduit = new Produit();
         this.loadProduits();
