@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 
-import {Produit} from '../shared/produit';
+import {Produit} from '../shared/produit.model';
 import {ProduitService} from './produit.service';
 
 @Component({
@@ -33,7 +33,7 @@ export class ProduitComponent implements OnInit {
     });
   }
   loadProduits(){
-    this.produitServie.getProduits().subscribe(
+    this.produitServie.getAll().subscribe(
       data=>{this.produits = data},
       error=>{console.log("An error was occured.")},
       ()=>{console.log('loading produits was done')}
@@ -41,7 +41,7 @@ export class ProduitComponent implements OnInit {
   }
   addProduit(){
     const p = this.produitForm.value;
-    this.produitServie.addProduit(p).subscribe(
+    this.produitServie.add(p).subscribe(
       res =>{
         this.initProduit();
         this.loadProduits();
@@ -49,7 +49,7 @@ export class ProduitComponent implements OnInit {
     );
   }
   updateProduit(){
-    this.produitServie.updateProduit(this.selectedProduit).subscribe(
+    this.produitServie.update(this.selectedProduit).subscribe(
       res=>{
         this.initProduit();
         this.loadProduits();
@@ -61,7 +61,7 @@ export class ProduitComponent implements OnInit {
     this.createFrom();
   }
   deleteProduit(){
-    this.produitServie.deleteProduit(this.selectedProduit.id).subscribe(
+    this.produitServie.delete(this.selectedProduit.id).subscribe(
       res=>{
         this.selectedProduit = new Produit();
         this.loadProduits();

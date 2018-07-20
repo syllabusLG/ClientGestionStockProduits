@@ -8,6 +8,6 @@ export class ProduitResolver implements Resolve<any>{
 
   }
   resolve(){
-    return this.produitService.getProduits();
+    return this.produitService.getAll();
   }
 }
