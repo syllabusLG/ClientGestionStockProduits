@@ -1,4 +1,11 @@
-<app-crud></app-crud>
+<app-crud
+  [title]="'Produits'"
+  [data]="produits"
+  [service]="produitService"
+  [initItem]="produit"
+  [initForm] = "produitForm"
+  [dataModelList] = "produitsModel">
+</app-crud>
 <!-- <div class="container">
   <h3>Produits</h3>
   <div class="row">
