@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 
 import {Produit} from '../shared/produit.model';
 import {ProduitService} from './produit.service';
+import {DataModel} from '../shared/data.model';
 
 @Component({
   selector: 'app-produit',
@@ -11,7 +12,34 @@ import {ProduitService} from './produit.service';
   styleUrls: ['./produit.component.css']
 })
 export class ProduitComponent implements OnInit {
+
   produits: Produit[];
+
+  produitForm: FormGroup;
+
+  produit: Produit = new Produit();
+
+  produitsModel: DataModel[];
+
+  constructor(private produitService:ProduitService, private fb: FormBuilder, private route: ActivatedRoute) {
+
+  }
+  ngOnInit() {
+    this.produits = this.route.snapshot.data.produits;
+    this.produitForm = this.fb.group({
+      ref: ['', Validators.required],
+      quantite: '',
+      prixUnitaire: ''
+    });
+
+    this.produitsModel = [
+      new DataModel('id','ID','number',true,[]),
+      new DataModel('ref','Référence','string',false,[]),
+      new DataModel('quantite','Quantité','number',false,[]),
+      new DataModel('prixUnitaire','Prix Unitaire','number',false,[])
+    ]
+  }
+  /*produits: Produit[];
 
   //variable pour le formulaire
   produitForm: FormGroup;
@@ -67,5 +95,5 @@ export class ProduitComponent implements OnInit {
         this.loadProduits();
       }
     );
-  }
+  }*/
 }
